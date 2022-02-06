@@ -25,6 +25,7 @@ El driver de conexión es "mysql-connector-java-8.0.22.jar", que esta en la carpe
 				
 ## Modelo de BBDD:
 
+![BBDD conectores](https://user-images.githubusercontent.com/78205607/152699497-971ef2d7-fb5b-4746-8999-d23293e6ad1d.png)
 
 ## REQUERIMIENTOS DE FUNCIONAMIENTO:
 
