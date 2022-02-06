@@ -25,6 +25,28 @@ public class ControladorPasajero {
 		}
 	}
 
+	/**
+	 * Metodo que borra un Pasajero por Id .
+	 * 
+	 * @param id Id del pasajero que queremos borrar.
+	 */
+	public boolean borrarPorId(int id) {
+		boolean baja = daoPasajero.baja(id);
+		return baja;
+	}
+	
+	/**
+	 * Metodo que consulta un pasajero por su Id.
+	 * @param id La Id del pasajero que queremos obtener
+	 * @return el pasajero consultado,
+	 */
+	public Pasajero consultarPorId(int id) {
+		Pasajero pasajero = daoPasajero.obtenerPasajero(id);
+		return pasajero;
+		
+
+	}
+
 	
 	
 

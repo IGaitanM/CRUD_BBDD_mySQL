@@ -3,8 +3,10 @@ package modelo.persistencia;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import modelo.entidad.Coche;
 import modelo.entidad.Pasajero;
 
 public class DaoPasajeroMySql {
@@ -72,5 +74,74 @@ public class DaoPasajeroMySql {
 		return alta;
 	}
 
+	/**
+	 * Método para borrar el registro de un Pasajero en la tabla PASAJEROS de la BBDD 
+	 * Abre la conexión, intenta borrar registro y cierra la conexion con la BBDD
+	 * 
+	 * @param id El id del PAsajero que queremos borrar.
+	 * @return true si se ha dado de alta y false si no
+	 */
+	public boolean baja(int id) {
+		if (!abrirConexion()) {
+			return false;
+		}
+
+		boolean borrado = true;
+		String query = "delete from PASAJEROS where id = ?";
+		try {
+			PreparedStatement ps = conexion.prepareStatement(query);
+			// sustituimos la primera interrgante por la id
+			ps.setInt(1, id);
+			int numeroFilasAfectadas = ps.executeUpdate();
+			if (numeroFilasAfectadas == 0)
+				borrado = false;
+		} catch (SQLException e) {
+			System.out.println("baja -> No se ha podido dar de baja" + " el id " + id);
+			e.printStackTrace();
+		} finally {
+			cerrarConexion();
+		}
+		return borrado;
+	}
+
+	/**
+	 * Método para consultar el registro de un pasajero en la tabla PASAJEROS de la BBDD
+	 * Abre la conexión, intenta consultar el registro y cierra la conexion con la
+	 * BBDD
+	 * 
+	 * @param id El id del Pasajero que queremos consultar de la BBDD
+	 * @return pasajero El coche que hemos consultado, null en caso de error de
+	 *         conexión con la BBDD
+	 */
+	public Pasajero obtenerPasajero(int id) {
+		if(!abrirConexion()){
+			return null;
+		}		
+		Pasajero pasajero = null;
+		
+		String query = "select ID,NOMBRE,EDAD,PESO from PASAJEROS "
+				+ "where ID = ?";
+		try {
+			PreparedStatement ps = conexion.prepareStatement(query);
+			ps.setInt(1, id);
+			
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()){
+				pasajero = new Pasajero();
+				pasajero.setId(rs.getInt(1));
+				pasajero.setNombre(rs.getString(2));
+				pasajero.setEdad(rs.getInt(3));
+				pasajero.setPeso(rs.getDouble(4));
+			}
+		} catch (SQLException e) {
+			System.out.println("obtener -> error al obtener el "
+					+ "pasajero con id " + id);
+			e.printStackTrace();
+		} finally {
+			cerrarConexion();
+		}
+		
+		return pasajero;
+	}
 
 }

@@ -124,8 +124,8 @@ public class UsuarioConsola {
 				System.out.println("----> 1. Añadir nuevo pasajero \n" + "----> 2. Borrar pasajero por id. \n"
 						+ "----> 3. Consultar pasajero por id. \n" + "----> 4. Listar todos los pasajeros \n"
 						+ "----> 5. Añadir pasajero a coche \n" + "----> 6. Eliminar pasajero de un coche \n"
-						+ "----> 7. Listar los pasajeros de un coche \n" + "----> 8. volver al menú de gestión de COCHES \n"
-						+ "----> 9. Salir del programa");
+						+ "----> 7. Listar los pasajeros de un coche \n"
+						+ "----> 8. volver al menú de gestión de COCHES \n" + "----> 9. Salir del programa");
 				opcion = sc.nextLine();
 
 				switch (opcion) {
@@ -138,18 +138,31 @@ public class UsuarioConsola {
 					System.out.println("Introzca Peso");
 					pasajero.setPeso(Double.parseDouble(sc.nextLine()));
 					int alta = cp.alta(pasajero);
-					if (alta == 0) 
+					if (alta == 0)
 						System.out.println("Pasajero dado de alta");
-					else 
+					else
 						System.out.println("Error de conexión con la BBDD");
-					
+
 					break;
 				case "2":
+					System.out.println("¿Que ID de pasajero quieres borrar?");
+					id = Integer.parseInt(sc.nextLine());
+					cp.borrarPorId(id);
 
 					break;
 				case "3":
+					System.out.println("¿Que ID de pasajero quieres consultar?");
+					id = Integer.parseInt(sc.nextLine());
+					while (cp.consultarPorId(id) == null) {
+						System.out.println("No hay ningun pasajero con esa id");
+						System.out.println("prueba con otra id");
+						id = Integer.parseInt(sc.nextLine());
+					}
+
+					System.out.println(cp.consultarPorId(id));
 
 					break;
+
 				case "4":
 
 					break;
