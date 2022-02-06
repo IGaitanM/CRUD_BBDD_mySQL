@@ -34,27 +34,51 @@ public class UsuarioConsola {
 					System.out.println("Añade el color");
 					coche.setColor(sc.nextLine());
 					int alta = cc.alta(coche);
-						if (alta == 0) {
-							System.out.println("Coche dado de alta");
-						} else if (alta == 1) {
-							System.out.println("Error de conexión con la BBDD");
-						} else if (alta == 2) {
-							System.out.println("No se ha dado de alta por matrícula repetida");
-						}
+					if (alta == 0) {
+						System.out.println("Coche dado de alta");
+					} else if (alta == 1) {
+						System.out.println("Error de conexión con la BBDD");
+					} else if (alta == 2) {
+						System.out.println("No se ha dado de alta por matrícula repetida");
+					}
 					break;
 				case "2":
 					System.out.println("¿Que ID quieres borrar?");
-					int id = sc.nextInt();
-					sc.nextLine();
-					cc.BorrarPorId(id);
+					cc.borrarPorId(Integer.parseInt(sc.nextLine()));
 					break;
 				case "3":
-					System.out.println("¿Que ID quieres consultar?");
-					int id1 = sc.nextInt();
-					sc.nextLine();
-					// cc.consultaPorId(id1);
+					System.out.println("¿Que ID de coche quieres consultar?");
+					int id = Integer.parseInt(sc.nextLine());
+					while (cc.consultarPorId(id) == null) {
+						System.out.println("No hay ningun coche con esa id");
+						System.out.println("prueba con otra id");
+						id = Integer.parseInt(sc.nextLine());
+					}
+
+					System.out.println(cc.consultarPorId(id));
+
 					break;
 				case "4":
+					System.out.println("¿Que ID de coche quieres modificar?");
+					int id1 = Integer.parseInt(sc.nextLine());
+					while (cc.consultarPorId(id1) == null) {
+						System.out.println("No hay ningun coche con esa id");
+						System.out.println("prueba con otra id");
+						id1 = Integer.parseInt(sc.nextLine());
+					}
+					Coche coche1 = new Coche();
+					coche1.setId(id1);
+					System.out.println("Añade la matrícula");
+					coche1.setMatricula(sc.nextLine());
+					System.out.println("Añade el modelo");
+					coche1.setModelo(sc.nextLine());
+					System.out.println("Añade el color");
+					coche1.setColor(sc.nextLine());
+
+					if (!cc.modificarCoche(coche1))
+						System.out.println("No se ha modificado por problema con la BBDD");
+					else
+						System.out.println("coche con id " +id1+ " modificado con éxito");
 
 					break;
 				case "5":
