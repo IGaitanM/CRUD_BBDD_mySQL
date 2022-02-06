@@ -12,8 +12,8 @@ public class ControladorCoche {
 	 * Metodo que da de alta un COCHE en base de datos.
 	 * 
 	 * @param c el coche a dar de alta
-	 * @return 0 en caso de que hayamos dado de alta el coche, 1 en caso de algun
-	 *         error de conexión con la bbdd y 2 en caso de que la matricula del
+	 * @return <li> 0 en caso de que hayamos dado de alta el coche, <li> 1 en caso de algun
+	 *         error de conexión con la bbdd y <li>2 en caso de que la matricula del
 	 *         coche ya exista en la BBDD
 	 */
 	public int alta(Coche c) {
@@ -35,11 +35,12 @@ public class ControladorCoche {
 	}
 
 	/**
-	 * Metodo que borra un Coche por Id e imprime el coche borrado.
+	 * Metodo que borra un Coche por Id .
+	 * @param id Id del coche que queremos borrar
 	 */
 	public boolean BorrarPorId(int id) {
-
-		return false;
+		boolean baja = daoCoche.baja(id);
+		return baja;
 	}
 
 	/**

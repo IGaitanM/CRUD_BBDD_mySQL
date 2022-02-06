@@ -46,7 +46,7 @@ public class UsuarioConsola {
 					System.out.println("¿Que ID quieres borrar?");
 					int id = sc.nextInt();
 					sc.nextLine();
-					// cc.BorrarPorId(id);
+					cc.BorrarPorId(id);
 					break;
 				case "3":
 					System.out.println("¿Que ID quieres consultar?");
