@@ -64,7 +64,7 @@ public class Pasajero {
 
 	@Override
 	public String toString() {
-		return "Pasajero [id=" + id + ", nombre=" + nombre + ", edad=" + edad + ", peso=" + peso + "]";
+		return " ID: "+ id +" - Nombre: " + nombre + " - Edad: " + edad +" - Peso: " + peso +"\n";
 	}
 	
 	

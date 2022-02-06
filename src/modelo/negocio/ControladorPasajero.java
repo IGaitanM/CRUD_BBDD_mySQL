@@ -1,13 +1,15 @@
 package modelo.negocio;
 
+import java.util.List;
+
+import modelo.entidad.Coche;
 import modelo.entidad.Pasajero;
 import modelo.persistencia.DaoPasajeroMySql;
 
-
 public class ControladorPasajero {
-	
+
 	private DaoPasajeroMySql daoPasajero = new DaoPasajeroMySql();
-	
+
 	/**
 	 * Metodo que da de alta un Pasajero en base de datos.
 	 * 
@@ -34,20 +36,29 @@ public class ControladorPasajero {
 		boolean baja = daoPasajero.baja(id);
 		return baja;
 	}
-	
+
 	/**
 	 * Metodo que consulta un pasajero por su Id.
+	 * 
 	 * @param id La Id del pasajero que queremos obtener
 	 * @return el pasajero consultado,
 	 */
 	public Pasajero consultarPorId(int id) {
 		Pasajero pasajero = daoPasajero.obtenerPasajero(id);
 		return pasajero;
-		
 
 	}
 
-	
-	
+	/**
+	 * Metodo que consulta a la BBDD y devuelve un listado con los pasajeros
+	 * registrados .
+	 * 
+	 * return listaPasajeros el listado de pasajeros guardados en la BBDD
+	 * 
+	 */
+	public List<Pasajero> listar() {
+		List<Pasajero> listaPasajeros = daoPasajero.listar();
+		return listaPasajeros;
+	}
 
 }

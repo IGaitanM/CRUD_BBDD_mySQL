@@ -181,9 +181,7 @@ public class DaoCocheMySql {
 	 * Método para consultar todos los registros la tabla COCHES de la BBDD Abre la
 	 * conexión, intenta consultar y cierra la conexion con la BBDD
 	 * 
-	 * @param id El id del Coche que queremos consultar de la BBDD
-	 * @return coche El coche que hemos consultado, null en caso de error de
-	 *         conexión con la BBDD
+	 * @return listaCoches registros de todos los coches de la tabla COCHES
 	 */
 	public List<Coche> listar() {
 		if (!abrirConexion()) {

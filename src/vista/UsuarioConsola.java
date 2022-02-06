@@ -164,8 +164,11 @@ public class UsuarioConsola {
 					break;
 
 				case "4":
-
+					System.out.println("Listado de personas:");
+					System.out.println(cp.listar());
+					
 					break;
+
 				case "5":
 
 					break;
