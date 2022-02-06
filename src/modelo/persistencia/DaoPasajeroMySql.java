@@ -144,7 +144,7 @@ public class DaoPasajeroMySql {
 
 	/**
 	 * Método para consultar todos los registros de la tabla PASAJEROS de la BBDD
-	 *  Abre la conexión, intenta consultar y cierra la conexion con la BBDD
+	 * Abre la conexión, intenta consultar y cierra la conexion con la BBDD
 	 * 
 	 * @return listaPasajeros registros de todos los pasajeros de la tabla PASAJEROS
 	 */
@@ -178,41 +178,74 @@ public class DaoPasajeroMySql {
 
 		return listaPasajeros;
 	}
-	
+
 	/**
-	 * Método que hace un Update en la tabla PASAJEROS de la BBDD
-	 * para asignar una id_coche al pasajero pasado por parámetro por su id
-	 *  Abre la conexión, intenta consultar y cierra la conexion con la BBDD
+	 * Método que hace un Update en la tabla PASAJEROS de la BBDD para asignar una
+	 * id_coche al pasajero pasado por parámetro por su id Abre la conexión, intenta
+	 * consultar y cierra la conexion con la BBDD
 	 * 
-	 * @return true si lo ha podido asignar o false si  ha habido algún error
+	 * @return true si lo ha podido asignar o false si ha habido algún error
 	 */
 	public boolean asignarCoche(int idPasajero, int idCoche) {
-		if(!abrirConexion()){
+		if (!abrirConexion()) {
 			return false;
 		}
 		boolean alta = true;
-		
-		String query = "UPDATE PASAJEROS SET id_coche=?"
-				+ " WHERE id=?";
+
+		String query = "UPDATE PASAJEROS SET id_coche=?" + " WHERE id=?";
 		try {
-			
+
 			PreparedStatement ps = conexion.prepareStatement(query);
 			ps.setInt(1, idCoche);
 			ps.setInt(2, idPasajero);
-			
-			
+
 			int numeroFilasAfectadas = ps.executeUpdate();
-			if(numeroFilasAfectadas == 0)
+			if (numeroFilasAfectadas == 0)
 				alta = false;
 		} catch (SQLException e) {
 			System.out.println("alta -> Error al asignar pasajero");
 			alta = false;
 			e.printStackTrace();
-		} finally{
+		} finally {
 			cerrarConexion();
 		}
-		
+
 		return alta;
 	}
+
+	/**
+	 * Método que hace un Update en la tabla PASAJEROS de la BBDD para quitar una
+	 * id_coche al pasajero pasado por parámetro por su id 
+	 * Abre la conexión, intenta consultar y cierra la conexion con la BBDD
+	 * 
+	 * @return true si lo ha podido quitar o false si ha habido algún error
+	 */
+	public boolean desasignarCoche(int idPasajero) {
+		if (!abrirConexion()) {
+			return false;
+		}
+
+		boolean baja = true;
+		String query = "UPDATE PASAJEROS SET ID_COCHE=NULL WHERE ID=?";
+		try {
+			PreparedStatement ps = conexion.prepareStatement(query);
+
+			ps.setInt(1, idPasajero);
+
+			int numeroFilasAfectadas = ps.executeUpdate();
+			if (numeroFilasAfectadas == 0)
+				baja = false;
+		} catch (SQLException e) {
+			baja = false;
+			System.out.println("baja() -> No se ha podido borrar" + " el id " + idPasajero);
+			e.printStackTrace();
+		} finally {
+			cerrarConexion();
+		}
+		return baja;
+	}
+	
+	
+	
 
 }

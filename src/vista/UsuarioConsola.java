@@ -7,6 +7,7 @@ import modelo.entidad.Pasajero;
 import modelo.negocio.ControladorCoche;
 import modelo.negocio.ControladorPasajero;
 
+
 public class UsuarioConsola {
 	
 	static ControladorCoche cc = new ControladorCoche();
@@ -189,6 +190,13 @@ public class UsuarioConsola {
 					break;
 				case "6":
 
+					System.out.println(cp.listar());
+					System.out.println("Introduzca el Id del pasajero que quiere eliminar de un coche");
+					idPasajero = Integer.parseInt(sc.nextLine());
+					System.out.println("Los coches disponibles para asignar son: ");
+					if (cp.eliminarDeCoche(idPasajero)) {
+						System.out.println("Pasajero eliminado del coche con exito");
+					}
 					break;
 				case "7":
 

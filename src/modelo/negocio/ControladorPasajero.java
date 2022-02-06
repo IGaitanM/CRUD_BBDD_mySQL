@@ -77,5 +77,22 @@ public class ControladorPasajero {
 			return false;
 		}
 	}
+	
+	/**
+	 * Metodo que elimina el id de un Pasajero del id de un coche.
+	 * 
+	 * @param idPasajero el pasajero a eliminar de un coche
+	 * @return
+	 *         <li>0 en caso de que hayamos eliminado el pasajero,
+	 *         <li>1 en caso de algun error de conexión con la bbdd 
+	 */
+	public boolean eliminarDeCoche(int idPasajero) {
+		boolean baja = daoPasajero.desasignarCoche(idPasajero);
+		if (baja) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 
 }
