@@ -2,7 +2,6 @@ package modelo.negocio;
 
 import java.util.List;
 
-import modelo.entidad.Coche;
 import modelo.entidad.Pasajero;
 import modelo.persistencia.DaoPasajeroMySql;
 
@@ -59,6 +58,24 @@ public class ControladorPasajero {
 	public List<Pasajero> listar() {
 		List<Pasajero> listaPasajeros = daoPasajero.listar();
 		return listaPasajeros;
+	}
+	
+	/**
+	 * Metodo que asocia el id de un Pasajero al id de un coche.
+	 * 
+	 * @param idPasajero el psajero a dar de alta en el coche
+	 * @param idCoche el psajero a dar de alta en el coche
+	 * @return
+	 *         <li>0 en caso de que hayamos dado de alta el pasajero,
+	 *         <li>1 en caso de algun error de conexión con la bbdd 
+	 */
+	public boolean asignarACoche(int idPasajero, int idCoche) {
+		boolean alta = daoPasajero.asignarCoche(idPasajero, idCoche);
+		if (alta) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 }

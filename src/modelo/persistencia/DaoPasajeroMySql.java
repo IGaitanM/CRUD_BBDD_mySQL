@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import modelo.entidad.Coche;
 import modelo.entidad.Pasajero;
 
 public class DaoPasajeroMySql {
@@ -178,6 +177,42 @@ public class DaoPasajeroMySql {
 		}
 
 		return listaPasajeros;
+	}
+	
+	/**
+	 * Método que hace un Update en la tabla PASAJEROS de la BBDD
+	 * para asignar una id_coche al pasajero pasado por parámetro por su id
+	 *  Abre la conexión, intenta consultar y cierra la conexion con la BBDD
+	 * 
+	 * @return true si lo ha podido asignar o false si  ha habido algún error
+	 */
+	public boolean asignarCoche(int idPasajero, int idCoche) {
+		if(!abrirConexion()){
+			return false;
+		}
+		boolean alta = true;
+		
+		String query = "UPDATE PASAJEROS SET id_coche=?"
+				+ " WHERE id=?";
+		try {
+			
+			PreparedStatement ps = conexion.prepareStatement(query);
+			ps.setInt(1, idCoche);
+			ps.setInt(2, idPasajero);
+			
+			
+			int numeroFilasAfectadas = ps.executeUpdate();
+			if(numeroFilasAfectadas == 0)
+				alta = false;
+		} catch (SQLException e) {
+			System.out.println("alta -> Error al asignar pasajero");
+			alta = false;
+			e.printStackTrace();
+		} finally{
+			cerrarConexion();
+		}
+		
+		return alta;
 	}
 
 }

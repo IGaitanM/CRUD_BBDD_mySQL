@@ -8,15 +8,19 @@ import modelo.negocio.ControladorCoche;
 import modelo.negocio.ControladorPasajero;
 
 public class UsuarioConsola {
+	
+	static ControladorCoche cc = new ControladorCoche();
+	static ControladorPasajero cp = new ControladorPasajero();
 
 	public static void main(String[] args) {
-
+		
+		
 		menuPrincipal();
 
 	}
 
 	public static void menuPrincipal() {
-		ControladorCoche cc = new ControladorCoche();
+		
 		Coche coche;
 		int id;
 		try (Scanner sc = new Scanner(System.in)) {
@@ -110,9 +114,10 @@ public class UsuarioConsola {
 	}
 
 	public static void submenuPasajeros() {
-		ControladorPasajero cp = new ControladorPasajero();
 		Pasajero pasajero;
 		int id;
+		int idPasajero;
+		int idCoche;
 		try (Scanner sc = new Scanner(System.in)) {
 			boolean continuar = true;
 			String opcion;
@@ -166,10 +171,20 @@ public class UsuarioConsola {
 				case "4":
 					System.out.println("Listado de personas:");
 					System.out.println(cp.listar());
-					
+
 					break;
 
 				case "5":
+					System.out.println(cp.listar());
+					System.out.println("Introduzca el Id del pasajero que quiere asignar a un coche");
+					idPasajero = Integer.parseInt(sc.nextLine());
+					System.out.println("Los coches disponibles para asignar son: ");
+					System.out.println(cc.listar());
+					System.out.println("Introduzca el id del coche elegido");
+					idCoche = Integer.parseInt(sc.nextLine());
+					if (cp.asignarACoche(idPasajero, idCoche)) {
+						System.out.println("Pasajero añadido al coche con exito");
+					}
 
 					break;
 				case "6":
