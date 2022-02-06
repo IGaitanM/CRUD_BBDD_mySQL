@@ -47,4 +47,3 @@ El driver de conexión es "mysql-connector-java-8.0.22.jar", que esta en la carpe
 
 
 
-

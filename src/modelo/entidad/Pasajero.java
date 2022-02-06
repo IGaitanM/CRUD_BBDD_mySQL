@@ -60,6 +60,12 @@ public class Pasajero {
 	public void setPeso(double peso) {
 		this.peso = peso;
 	}
+
+
+	@Override
+	public String toString() {
+		return "Pasajero [id=" + id + ", nombre=" + nombre + ", edad=" + edad + ", peso=" + peso + "]";
+	}
 	
 	
 

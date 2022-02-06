@@ -7,7 +7,6 @@ import modelo.persistencia.DaoCocheMySql;
 
 public class ControladorCoche {
 
-	public int contador;
 	private DaoCocheMySql daoCoche = new DaoCocheMySql();
 
 	/**
