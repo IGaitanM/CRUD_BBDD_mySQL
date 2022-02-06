@@ -1,5 +1,7 @@
 package modelo.negocio;
 
+import java.util.List;
+
 import modelo.entidad.Coche;
 import modelo.persistencia.DaoCocheMySql;
 
@@ -37,14 +39,6 @@ public class ControladorCoche {
 	}
 
 	/**
-	 * Metodo que lista los coches contenidos en la BBDD.
-	 */
-
-	public void listarCoches() {
-
-	}
-
-	/**
 	 * Metodo que consulta un coche por su Id y lo imprime.
 	 * @param id La Id del coche que queremos obtener
 	 * @return el coche consultado,
@@ -66,6 +60,17 @@ public class ControladorCoche {
 		boolean modificar = daoCoche.modificar(c);
 		return modificar;
 		
+	}
+	
+	/**
+	 * Metodo que consulta a la BBDD y devuelve un listado con los coches disponibles .
+
+	 * return listaCoches el listado de coches guardados en la BBDD
+	 * 
+	 */
+	public List<Coche> listar(){
+		List<Coche> listaCoches = daoCoche.listar();
+		return listaCoches;
 	}
 
 

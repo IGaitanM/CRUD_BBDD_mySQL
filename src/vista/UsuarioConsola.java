@@ -16,7 +16,7 @@ public class UsuarioConsola {
 
 			while (continuar) {
 
-				System.out.println("-----MENÚ PARA LA GESTIÓN DE COCHES-----");
+				System.out.println("\n-----MENÚ PARA LA GESTIÓN DE COCHES-----");
 				System.out.println("_________________________________________");
 				System.out.println("----> 1. Añadir nuevo coche \n" + "----> 2. Borrar coche por id. \n"
 						+ "----> 3. Consultar coche por id. \n" + "----> 4. Modificar coche por id \n"
@@ -76,13 +76,13 @@ public class UsuarioConsola {
 					coche1.setColor(sc.nextLine());
 
 					if (!cc.modificarCoche(coche1))
-						System.out.println("No se ha modificado por problema con la BBDD");
+						System.out.println("Error de conexión con la BBDD");
 					else
 						System.out.println("coche con id " +id1+ " modificado con éxito");
 
 					break;
 				case "5":
-					// cc.listarCoches();
+					System.out.println(cc.listar());
 					break;
 				case "6":
 

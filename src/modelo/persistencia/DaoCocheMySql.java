@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import modelo.entidad.Coche;
 
@@ -138,6 +140,15 @@ public class DaoCocheMySql {
 		return modificado;
 	}
 
+	/**
+	 * Método para consultar el registro de un coche en la tabla COCHES de la BBDD
+	 * Abre la conexión, intenta consultar el registro y cierra la conexion con la
+	 * BBDD
+	 * 
+	 * @param id El id del Coche que queremos consultar de la BBDD
+	 * @return coche El coche que hemos consultado, null en caso de error de
+	 *         conexión con la BBDD
+	 */
 	public Coche obtenerCoche(int id) {
 		if (!abrirConexion()) {
 			return null;
@@ -164,6 +175,45 @@ public class DaoCocheMySql {
 			cerrarConexion();
 		}
 		return coche;
+	}
+
+	/**
+	 * Método para consultar todos los registros la tabla COCHES de la BBDD Abre la
+	 * conexión, intenta consultar y cierra la conexion con la BBDD
+	 * 
+	 * @param id El id del Coche que queremos consultar de la BBDD
+	 * @return coche El coche que hemos consultado, null en caso de error de
+	 *         conexión con la BBDD
+	 */
+	public List<Coche> listar() {
+		if (!abrirConexion()) {
+			return null;
+		}
+		List<Coche> listaCoches = new ArrayList<>();
+
+		String query = "select ID,MATRICULA,MODELO,COLOR from COCHES";
+		try {
+			PreparedStatement ps = conexion.prepareStatement(query);
+
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				Coche coche = new Coche();
+				coche.setId(rs.getInt(1));
+				coche.setMatricula(rs.getString(2));
+				coche.setModelo(rs.getString(3));
+				coche.setColor(rs.getString(4));
+
+				listaCoches.add(coche);
+			}
+		} catch (SQLException e) {
+			System.out.println("listar -> error al obtener las " + "personas");
+			e.printStackTrace();
+		} finally {
+			cerrarConexion();
+		}
+
+		return listaCoches;
 	}
 
 }

@@ -69,7 +69,7 @@ public class Coche implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Coche [id=" + id + ", matricula=" + matricula + ", modelo=" + modelo + ", color=" + color + "]";
+		return " Id: "+ id + " - Matricula: " + matricula + " - Modelo: " + modelo + " - Color: " + color + "\n";
 	}
 	
 	
